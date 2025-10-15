@@ -1,3 +1,31 @@
+// Função para simular o conteúdo do PDF (acessível de qualquer lugar)
+function simularRelatorio(tipo) {
+    let titulo = "";
+    let conteudo = "";
+
+    switch (tipo) {
+        case 'boletim':
+            titulo = "Boletim Mensal de Operações - Agosto 2025";
+            conteudo = "Foco: Desarticulação de 8 células de Orcrims em 4 estados do Nordeste. Resultado: 45 prisões e 285 operações integradas (FICCO). O sucesso da operação 'Sentinela' reforça a eficácia da ação coordenada de inteligência. Taxa de sucesso: 92% das metas operacionais alcançadas.";
+            break;
+        case 'financeiro':
+            titulo = "Relatório Financeiro - 2º Trimestre 2025";
+            conteudo = "Detalhe: Bloqueio judicial de R$ 980 milhões em ativos (imóveis, veículos de luxo e contas bancárias). Total de confiscos no trimestre: R$ 3.2 BILHÕES. O Eixo Financeiro está 64% da meta anual de R$ 5.0 Bi. Principais desafios: Celeridade na alienação dos bens.";
+            break;
+        case 'fronteiras':
+            titulo = "Resumo de Apreensões em Fronteiras - 2025";
+            conteudo = "Total Anual: 15.500 KG de substâncias ilícitas apreendidas. Destaque: 65% das apreensões ocorreram em portos (Eixo 1). Tendência: Houve uma redução de 3% nas apreensões no último mês, indicando possível desvio de rotas ou aumento na discrição. Plano de Ação: Reforço na tecnologia de escaneamento em áreas críticas.";
+            break;
+        default:
+            titulo = "Relatório Não Encontrado";
+            conteudo = "O resumo para este relatório não está disponível.";
+    }
+
+    // Exibe o conteúdo de forma acessível
+    alert(`== ${titulo} ==\n\nResumo:\n${conteudo}\n\n[Este é um resumo simulado. Em um site real, esta ação abriria um documento PDF completo.]`);
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     // Dados dos Eixos Estratégicos
     const dadosEixos = {
@@ -39,11 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
         faqConteudo.innerHTML = htmlFaq;
     }
 
+    // Função que renderiza o conteúdo detalhado de cada Eixo
     function renderizarPainel(eixo) {
         const dados = dadosEixos[eixo];
         const corProgresso = dados.progresso >= 80 ? '#2e7d32' : dados.progresso >= 60 ? '#ffb300' : '#c62828';
+        
+        // Adicionamos 'role="region" aria-live="polite"' para acessibilidade (leitores de tela)
         const htmlDetalhe = `
-            <div class="eixo-header">
+            <div class="eixo-header" role="region" aria-live="polite">
                 <h3>${dados.titulo}</h3>
                 <p class="status-eixo">Status: <strong>${dados.status}</strong></p>
             </div>
@@ -78,14 +109,35 @@ document.addEventListener('DOMContentLoaded', () => {
     dataAtualizacao.textContent = new Date().toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
     
     colorirKpis(); 
+    
+    // Configuração inicial do ARIA para os botões de filtro
+    btnsEixo.forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-controls', 'painel-conteudo');
+    });
+    
+    // Definir o botão ativo inicial como expandido
+    const btnAtivoInicial = document.querySelector('.btn-ativo');
+    if (btnAtivoInicial) {
+        btnAtivoInicial.setAttribute('aria-expanded', 'true');
+    }
+    
     renderizarPainel('Fin'); 
     renderizarFaq(); 
 
-    // Event Listeners dos Eixos
+    // Event Listeners dos Eixos (Atualizado para lidar com ARIA)
     btnsEixo.forEach(btn => {
         btn.addEventListener('click', function () {
-            btnsEixo.forEach(b => b.classList.remove('btn-ativo'));
+            // 1. Remove classes e ARIA de todos
+            btnsEixo.forEach(b => {
+                b.classList.remove('btn-ativo');
+                b.setAttribute('aria-expanded', 'false');
+            });
+            // 2. Adiciona classes e ARIA ao botão clicado
             this.classList.add('btn-ativo');
+            this.setAttribute('aria-expanded', 'true');
+            
+            // 3. Renderiza o conteúdo
             renderizarPainel(this.getAttribute('data-eixo'));
         });
     });

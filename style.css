@@ -22,7 +22,6 @@ header {
     color: white;
     padding: 25px 20px;
     text-align: center;
-    /* Comandos de fixação removidos */
 }
 
 .logo-header {
@@ -120,7 +119,7 @@ main {
     transition: color 0.3s;
 }
 
-/* CORES DINÂMICAS PARA KPIS (Melhoria de Status) */
+/* CORES DINÂMICAS PARA KPIS (Status) */
 .kpi-card[data-status="otimo"] {
     border-color: var(--cor-verde);
 }
@@ -142,7 +141,7 @@ main {
     color: var(--cor-vermelho);
 }
 
-/* Estilos para a Tendência nos KPIs (Melhoria de Contexto) */
+/* Estilos para a Tendência nos KPIs */
 .kpi-meta {
     font-size: 0.9em;
     color: #666;
@@ -176,8 +175,7 @@ main {
     margin-right: 5px;
 }
 
-
-/* NOVO: Estilos para a Seção de Metodologia */
+/* Estilos para a Seção de Metodologia */
 .metodologia-area {
     margin-top: 50px;
     padding: 20px;
@@ -212,7 +210,6 @@ main {
     border-left: 3px solid var(--cor-amarelo);
     padding-left: 10px;
 }
-
 
 /* Análise dos eixos */
 .analise-eixos h2 {
@@ -271,6 +268,8 @@ main {
     font-weight: bold;
     transition: width 0.5s;
     min-width: 25px; 
+    /* Melhoria de Contraste para o texto */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
 }
 
 /* Seção de FAQ/Glossário */
@@ -302,7 +301,6 @@ main {
 /* Gráficos */
 .graficos-area {
     margin-top: 50px;
-    /* Centraliza o gráfico e permite limitar a largura */
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -313,7 +311,6 @@ main {
     background-color: var(--cor-card);
     border-radius: 12px;
     padding: 15px;
-    /* Limita a largura do gráfico */
     max-width: 600px; 
     width: 100%; 
 }
@@ -427,64 +424,28 @@ footer {
     color: #555;
 }
 
-/* Responsividade (Melhoria de Usabilidade) */
-@media (max-width: 768px) {
-    .kpis-area {
-        justify-content: center; 
-    }
-    .kpi-card {
-        flex: 1 1 100%; 
-    }
-    header .menu-fixo {
-        gap: 10px;
-        padding-top: 5px;
-        margin-top: 5px;
-        font-size: 0.9em; 
-    }
+/* ======================================================= */
+/* REGRAS DE ACESSIBILIDADE - FOCO DO TECLADO               */
+/* ======================================================= */
+
+/* Garante que todos os elementos interativos tenham um foco visível ao navegar por teclado */
+button:focus,
+a:focus,
+.kpi-card:focus {
+    outline: 3px solid #ffeb3b; /* Amarelo brilhante para alto contraste */
+    outline-offset: 2px; /* Espaço entre o elemento e o foco */
+    border-radius: 5px;
 }
 
-/* Dark Mode */
-body.dark-mode {
-    --cor-fundo: #1e1e2f;
-    --cor-card: #2c2c3c;
-    --cor-principal: #0d47a1;
-    --cor-texto: #f5f5f5;
-    --cor-amarelo: #ffc107;
+/* Garante que o outline não afete a cor do texto no Dark Mode */
+body.dark-mode button:focus,
+body.dark-mode a:focus {
+    outline: 3px solid #ffeb3b; 
 }
 
-body.dark-mode .kpi-meta {
-    color: #bbb;
-}
-body.dark-mode .detalhe-painel, 
-body.dark-mode .faq-conteudo,
-body.dark-mode .metodologia-area,
-body.dark-mode .metodologia-conteudo ul li {
-    background-color: #38384d;
-}
-body.dark-mode .faq-item p {
-    color: #ccc;
-}
-body.dark-mode .metodologia-area h2 {
-    border-bottom-color: #555;
-}
-/* ... CÓDIGO CSS ANTERIOR ... */
-
-/* Footer (Mantido) */
-footer {
-    text-align: center;
-    padding: 15px;
-    margin-top: 30px;
-    background-color: #ddd;
-    font-size: 0.85em;
-    color: #555;
-}
-
-/* Dark Mode (Mantido) */
-
-/* ... CÓDIGO DARK MODE ANTERIOR ... */
 
 /* ======================================================= */
-/* MEDIA QUERIES PARA ADAPTAÇÃO MOBILE E TABLET (CRÍTICO)   */
+/* ADAPTAÇÃO MOBILE E TABLET (RESPONSIVIDADE)               */
 /* ======================================================= */
 
 /* 1. Mobile (Telas até 768px) - Prioriza o empilhamento vertical */
@@ -551,7 +512,7 @@ footer {
     
     /* Menu Fixo (Header) */
     header .menu-fixo {
-        gap: 10px; /* Espaço entre os links */
+        gap: 10px; 
         padding: 10px 0;
     }
     header .menu-fixo a {
@@ -560,20 +521,44 @@ footer {
 
     /* KPIs (Cards) */
     .kpis-area {
-        /* Permite que o flexbox distribua os 3 cards, mas com menos espaço */
         gap: 15px; 
         justify-content: space-around;
     }
     .kpi-card {
-        flex: 1 1 280px; /* Garante que os cards não fiquem muito apertados, mas sejam menores */
+        flex: 1 1 280px; 
     }
     
     /* Análise dos Eixos (Filtros) */
     .filtros {
-        /* Permite que dois ou três botões fiquem lado a lado */
         justify-content: space-between;
     }
     .btn-eixo {
-        flex: 1 1 48%; /* Ocupa quase metade da largura para 2 botões por linha */
+        flex: 1 1 48%; 
     }
+}
+
+
+/* Dark Mode */
+body.dark-mode {
+    --cor-fundo: #1e1e2f;
+    --cor-card: #2c2c3c;
+    --cor-principal: #0d47a1;
+    --cor-texto: #f5f5f5;
+    --cor-amarelo: #ffc107;
+}
+
+body.dark-mode .kpi-meta {
+    color: #bbb;
+}
+body.dark-mode .detalhe-painel, 
+body.dark-mode .faq-conteudo,
+body.dark-mode .metodologia-area,
+body.dark-mode .metodologia-conteudo ul li {
+    background-color: #38384d;
+}
+body.dark-mode .faq-item p {
+    color: #ccc;
+}
+body.dark-mode .metodologia-area h2 {
+    border-bottom-color: #555;
 }
