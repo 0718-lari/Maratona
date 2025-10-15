@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema ENFOC - Relatório Tático Integrado</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <img src="favicon.png" alt="Logo da ENFOC" class="logo-header">
+        <h1>Sistema Tático ENFOC: Relatório de Ações e Impacto</h1>
+        <p>Monitoramento contínuo dos 5 Eixos Estratégicos contra as facções.</p>
+        <button id="btn-toggle-dark" class="btn-dark">Modo Escuro</button>
+        <nav class="menu-fixo">
+            <a href="#kpis"><i class="fas fa-chart-line"></i> KPIs</a>
+            <a href="#metodologia"><i class="fas fa-microscope"></i> Metodologia</a>
+            <a href="#analise"><i class="fas fa-cube"></i> Eixos</a>
+            <a href="#glossario"><i class="fas fa-question-circle"></i> FAQ/Glossário</a>
+            <a href="#graficos"><i class="fas fa-chart-bar"></i> Gráficos</a>
+            <a href="#relatorios"><i class="fas fa-file-alt"></i> Relatórios</a>
+            <a href="#alerta"><i class="fas fa-bell"></i> Alertas</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="kpis" class="kpis-area">
+            <h2>Indicadores de Descapitalização</h2>
+            <div class="kpi-card" id="kpi-financeiro" data-status=""> 
+                <h3>Recuperação de Ativos</h3>
+                <p class="kpi-valor" data-valor="3.2" data-unidade="Bi">R$ 3.2 BILHÕES</p>
+                <span class="kpi-meta" data-tendencia="">Meta: R$ 5.0 Bi (2026)</span>
+            </div>
+            <div class="kpi-card" id="kpi-operacoes" data-status="">
+                <h3>Operações Integradas (FICCO)</h3>
+                <p class="kpi-valor" data-valor="285" data-unidade="Ops">285 Operações</p>
+                <span class="kpi-meta" data-tendencia="">Aumento de 25% A.A.</span>
+            </div>
+            <div class="kpi-card" id="kpi-fronteiras" data-status="">
+                <h3>Apreensão em Fronteiras (Kg)</h3>
+                <p class="kpi-valor" data-valor="15500" data-unidade="Kg">15.500 KG</p>
+                <span class="kpi-meta" data-tendencia="">Eixo 1 - Portos/Fronteiras</span>
+            </div>
+        </section>
+
+        <section id="metodologia" class="metodologia-area">
+            <h2><i class="fas fa-gavel"></i> Metodologia e Fontes de Dados</h2>
+            <div class="metodologia-conteudo">
+                <p>O Sistema ENFOC opera com dados brutos auditados e validados por órgãos estratégicos. A transparência é garantida pela consolidação de múltiplas fontes:</p>
+                <ul>
+                    <li>**Recuperação de Ativos (R$):** Consolidação dos valores bloqueados e confiscados provenientes do COAF e sistemas de Justiça Criminal.</li>
+                    <li>**Operações Integradas (FICCO):** Contagem trimestral das ações coordenadas entre as Polícias Federal, Civil e Militar.</li>
+                    <li>**Apreensão em Fronteiras (Kg):** Dados fornecidos pelo SINESP (Sistema Nacional de Informações de Segurança Pública) e Receita Federal.</li>
+                </ul>
+                <p class="fonte-aviso">⚠️ **Atualização:** Os dados são consolidados semanalmente. Para relatórios detalhados, consulte a seção 'Relatórios'.</p>
+            </div>
+        </section>
+
+        <section id="analise" class="analise-eixos">
+            <h2>Status Detalhado dos Eixos Estratégicos</h2>
+            <div class="filtros">
+                <button class="btn-eixo" data-eixo="Int">Inteligência (EIXO 2)</button>
+                <button class="btn-eixo" data-eixo="Jus">Justiça Criminal (EIXO 4)</button>
+                <button class="btn-eixo" data-eixo="Soc">Prevenção Social</button>
+                <button class="btn-eixo btn-ativo" data-eixo="Fin">Financeiro (EIXO 2/4)</button>
+            </div>
+            <div class="detalhe-painel">
+                <div id="painel-conteudo">Selecione um Eixo para ver o Relatório de Progresso.</div>
+            </div>
+        </section>
+
+        <section id="glossario" class="faq-area">
+            <h2><i class="fas fa-info-circle"></i> FAQ e Glossário de Termos Técnicos</h2>
+            <div class="faq-conteudo" id="faq-conteudo">
+                <p>Informações e explicações sobre os termos técnicos do sistema ENFOC.</p>
+            </div>
+        </section>
+        
+        <section id="graficos" class="graficos-area">
+            <h2>Gráfico de Progresso dos Eixos Estratégicos</h2>
+            <canvas id="graficoKpis" height="200"></canvas>
+        </section>
+
+        <section id="relatorios" class="relatorios-area">
+            <h2>Relatórios Públicos</h2>
+            <div class="relatorio-card">
+                <p>Boletim Mensal de Operações - Agosto 2025</p>
+                <button class="btn-relatorio" onclick="alert('Download simulado de PDF')">Download PDF</button>
+            </div>
+            <div class="relatorio-card">
+                <p>Relatório Financeiro - 2º Trimestre 2025</p>
+                <button class="btn-relatorio" onclick="alert('Download simulado de PDF')">Download PDF</button>
+            </div>
+            <div class="relatorio-card">
+                <p>Resumo de Apreensões em Fronteiras - 2025</p>
+                <button class="btn-relatorio" onclick="alert('Download simulado de PDF')">Download PDF</button>
+            </div>
+        </section>
+
+        <section id="alerta" class="alerta-resistencia">
+            <h2>Alerta Tático e Resistência das Facções</h2>
+            <div class="alerta-box" id="alerta-box-info">
+                <p id="alerta-mensagem"><i class="fas fa-spinner fa-spin"></i> Monitorando...</p>
+                <button id="btn-detalhe-alerta"></button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Sistema de Gerenciamento Estratégico do Combate ao Crime Organizado | Atualizado em: <span
+                id="data-atualizacao"></span></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
