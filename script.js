@@ -90,17 +90,31 @@ document.addEventListener('DOMContentLoaded', () => {
         painelConteudo.innerHTML = htmlDetalhe;
     }
 
-    // Aplica o Status de Cor e a Tendência nos KPIs
+    // Aplica o Status de Cor e a Tendência nos KPIs (Melhorado para acessibilidade)
     function colorirKpis() {
         dadosKpis.forEach(kpi => {
             const card = document.getElementById(kpi.id);
             const metaSpan = card ? card.querySelector('.kpi-meta') : null;
+            
+            let textoAcessivelTendencia = '';
+            if (kpi.tendencia === 'up') {
+                textoAcessivelTendencia = 'Aumento de desempenho. ';
+            } else if (kpi.tendencia === 'down') {
+                textoAcessivelTendencia = 'Redução de desempenho. ';
+            } else if (kpi.tendencia === 'neutral') {
+                textoAcessivelTendencia = 'Desempenho estável. ';
+            }
 
             if (card) {
                 card.setAttribute('data-status', kpi.status);
             }
             if (metaSpan && kpi.tendencia) {
                 metaSpan.setAttribute('data-tendencia', kpi.tendencia);
+                
+                // Adiciona um span visualmente escondido, mas lido pelo leitor de tela
+                metaSpan.innerHTML = `
+                    <span class="visually-hidden">${textoAcessivelTendencia}</span>
+                    ${metaSpan.innerHTML}`;
             }
         });
     }
@@ -160,11 +174,49 @@ document.addEventListener('DOMContentLoaded', () => {
         alertaMensagem.innerHTML = `<i class="fas fa-check-circle"></i> Status Operacional: Estável. Progresso geral dos Eixos OK.`;
     }
 
+    // =======================================================
+    // LÓGICA DOS BOTÕES DE ACESSIBILIDADE DE TELA
+    // =======================================================
+
     // Dark Mode
     const btnDark = document.getElementById('btn-toggle-dark');
     btnDark.addEventListener('click', () => document.body.classList.toggle('dark-mode'));
+    
+    // Modo Daltônico
+    const btnDaltonismo = document.getElementById('btn-toggle-daltonismo');
+    btnDaltonismo.addEventListener('click', () => {
+        document.body.classList.toggle('mode-daltonismo');
+        
+        if (document.body.classList.contains('mode-daltonismo')) {
+            document.body.classList.remove('mode-alto-contraste'); // Remove o Alto Contraste
+            btnDaltonismo.textContent = 'Modo Daltônico (ATIVO)';
+            document.getElementById('btn-toggle-alto-contraste').textContent = 'Alto Contraste';
+            alert('Modo Daltônico ativado. As cores e padrões de fundo foram ajustados para melhor distinguibilidade.');
+        } else {
+            btnDaltonismo.textContent = 'Modo Daltônico';
+        }
+    });
 
+    // Modo Alto Contraste
+    const btnContraste = document.getElementById('btn-toggle-alto-contraste');
+    btnContraste.addEventListener('click', () => {
+        document.body.classList.toggle('mode-alto-contraste');
+        
+        if (document.body.classList.contains('mode-alto-contraste')) {
+            document.body.classList.remove('mode-daltonismo'); // Remove o Daltônico
+            btnContraste.textContent = 'Alto Contraste (ATIVO)';
+            document.getElementById('btn-toggle-daltonismo').textContent = 'Modo Daltônico';
+            alert('Modo de Alto Contraste ativado. O esquema de cores foi alterado para preto e amarelo vibrante.');
+        } else {
+            btnContraste.textContent = 'Alto Contraste';
+        }
+    });
+    
+    // **A lógica do botão de Surdos/Libras foi removida, pois o VLibras é integrado diretamente no HTML.**
+    
+    // =======================================================
     // Gráfico de Barras (Gráfico de Progresso)
+    // =======================================================
     const ctxKpis = document.getElementById('graficoKpis').getContext('2d');
     new Chart(ctxKpis, {
         type: 'bar',

@@ -16,7 +16,10 @@
         <img src="favicon.png" alt="Logo da ENFOC" class="logo-header">
         <h1>Sistema Tático ENFOC: Relatório de Ações e Impacto</h1>
         <p>Monitoramento contínuo dos 5 Eixos Estratégicos contra as facções.</p>
+        
         <button id="btn-toggle-dark" class="btn-dark">Modo Escuro</button>
+        <button id="btn-toggle-alto-contraste" class="btn-contraste">Alto Contraste</button>
+        <button id="btn-toggle-daltonismo" class="btn-daltonismo">Modo Daltônico</button>
         <nav class="menu-fixo">
             <a href="#kpis"><i class="fas fa-chart-line"></i> KPIs</a>
             <a href="#metodologia"><i class="fas fa-microscope"></i> Metodologia</a>
@@ -31,17 +34,17 @@
     <main>
         <section id="kpis" class="kpis-area">
             <h2>Indicadores de Descapitalização</h2>
-            <div class="kpi-card" id="kpi-financeiro" data-status=""> 
+            <div class="kpi-card" id="kpi-financeiro" data-status="" role="region" aria-label="KPI de Recuperação de Ativos"> 
                 <h3>Recuperação de Ativos</h3>
                 <p class="kpi-valor" data-valor="3.2" data-unidade="Bi">R$ 3.2 BILHÕES</p>
                 <span class="kpi-meta" data-tendencia="">Meta: R$ 5.0 Bi (2026)</span>
             </div>
-            <div class="kpi-card" id="kpi-operacoes" data-status="">
+            <div class="kpi-card" id="kpi-operacoes" data-status="" role="region" aria-label="KPI de Operações Integradas">
                 <h3>Operações Integradas (FICCO)</h3>
                 <p class="kpi-valor" data-valor="285" data-unidade="Ops">285 Operações</p>
                 <span class="kpi-meta" data-tendencia="">Aumento de 25% A.A.</span>
             </div>
-            <div class="kpi-card" id="kpi-fronteiras" data-status="">
+            <div class="kpi-card" id="kpi-fronteiras" data-status="" role="region" aria-label="KPI de Apreensão em Fronteiras">
                 <h3>Apreensão em Fronteiras (Kg)</h3>
                 <p class="kpi-valor" data-valor="15500" data-unidade="Kg">15.500 KG</p>
                 <span class="kpi-meta" data-tendencia="">Eixo 1 - Portos/Fronteiras</span>
@@ -116,6 +119,16 @@
                 id="data-atualizacao"></span></p>
     </footer>
 
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-row"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
     <script src="script.js"></script>
 </body>
 

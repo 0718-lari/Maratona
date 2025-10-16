@@ -40,16 +40,23 @@ header p {
     font-size: 1em;
 }
 
-.btn-dark {
+/* Botões de Toggle (Modo Escuro, Alto Contraste, Daltônico) */
+.btn-dark, .btn-daltonismo, .btn-contraste {
     padding: 8px 15px;
-    border: none;
+    border: 1px solid var(--cor-principal);
     border-radius: 5px;
     background-color: white;
     color: var(--cor-principal);
     cursor: pointer;
     margin-top: 10px;
     font-weight: bold;
+    margin-left: 10px; 
+    transition: background-color 0.3s;
 }
+.btn-daltonismo:hover, .btn-contraste:hover {
+    background-color: #e0e0e0;
+}
+
 
 header .menu-fixo {
     margin-top: 15px;
@@ -144,7 +151,7 @@ main {
 /* Estilos para a Tendência nos KPIs */
 .kpi-meta {
     font-size: 0.9em;
-    color: #666;
+    color: #444; /* Melhor contraste no modo claro */
     display: block; 
     margin-top: 5px;
 }
@@ -295,7 +302,7 @@ main {
 }
 .faq-item p {
     font-size: 0.95em;
-    color: #555;
+    color: #444; /* Melhor contraste no modo claro */
 }
 
 /* Gráficos */
@@ -421,7 +428,7 @@ footer {
     margin-top: 30px;
     background-color: #ddd;
     font-size: 0.85em;
-    color: #555;
+    color: #444; 
 }
 
 /* ======================================================= */
@@ -433,7 +440,7 @@ button:focus,
 a:focus,
 .kpi-card:focus {
     outline: 3px solid #ffeb3b; /* Amarelo brilhante para alto contraste */
-    outline-offset: 2px; /* Espaço entre o elemento e o foco */
+    outline-offset: 2px; 
     border-radius: 5px;
 }
 
@@ -441,6 +448,19 @@ a:focus,
 body.dark-mode button:focus,
 body.dark-mode a:focus {
     outline: 3px solid #ffeb3b; 
+}
+
+/* Classe para esconder conteúdo visualmente, mas mantê-lo acessível por leitores de tela */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 
@@ -451,14 +471,14 @@ body.dark-mode a:focus {
 /* 1. Mobile (Telas até 768px) - Prioriza o empilhamento vertical */
 @media (max-width: 768px) {
     
-    /* Corpo e Margens */
+    /* ... Regras de Mobile ... */
     main {
-        padding: 10px; /* Reduz o padding lateral */
+        padding: 10px; 
     }
     
     /* Menu Fixo (Header) */
     header .menu-fixo {
-        flex-direction: column; /* Menu vertical para economizar espaço */
+        flex-direction: column; 
         gap: 5px;
         padding: 5px;
     }
@@ -470,25 +490,25 @@ body.dark-mode a:focus {
 
     /* KPIs (Cards) */
     .kpis-area {
-        flex-direction: column; /* Empilha os cards verticalmente */
-        gap: 15px; /* Ajusta o espaçamento */
+        flex-direction: column; 
+        gap: 15px; 
     }
     .kpi-card {
-        flex: 1 1 100%; /* Ocupa a largura total */
-        padding: 15px; /* Reduz o padding interno */
+        flex: 1 1 100%; 
+        padding: 15px; 
     }
 
     /* Análise dos Eixos (Filtros) */
     .filtros {
-        flex-direction: column; /* Empilha os botões de filtro */
+        flex-direction: column; 
     }
     .btn-eixo {
-        width: 100%; /* Faz os botões ocuparem a largura total */
+        width: 100%; 
     }
     
     /* Alertas */
     .alerta-box {
-        flex-direction: column; /* Empilha a mensagem e o botão de alerta */
+        flex-direction: column; 
         align-items: center;
         text-align: center;
         padding: 15px;
@@ -499,7 +519,7 @@ body.dark-mode a:focus {
 
     /* Relatórios */
     .relatorios-area {
-        flex-direction: column; /* Empilha os relatórios */
+        flex-direction: column; 
         gap: 10px;
     }
     .relatorio-card {
@@ -510,7 +530,7 @@ body.dark-mode a:focus {
 /* 2. Tablet (Telas de 769px até 1024px) - Layout de duas colunas */
 @media (min-width: 769px) and (max-width: 1024px) {
     
-    /* Menu Fixo (Header) */
+    /* ... Regras de Tablet ... */
     header .menu-fixo {
         gap: 10px; 
         padding: 10px 0;
@@ -538,6 +558,10 @@ body.dark-mode a:focus {
 }
 
 
+/* ======================================================= */
+/* MODOS DE ACESSIBILIDADE DE CORES                         */
+/* ======================================================= */
+
 /* Dark Mode */
 body.dark-mode {
     --cor-fundo: #1e1e2f;
@@ -548,17 +572,94 @@ body.dark-mode {
 }
 
 body.dark-mode .kpi-meta {
-    color: #bbb;
-}
-body.dark-mode .detalhe-painel, 
-body.dark-mode .faq-conteudo,
-body.dark-mode .metodologia-area,
-body.dark-mode .metodologia-conteudo ul li {
-    background-color: #38384d;
+    color: #ddd; 
 }
 body.dark-mode .faq-item p {
-    color: #ccc;
+    color: #ddd; 
 }
-body.dark-mode .metodologia-area h2 {
-    border-bottom-color: #555;
+body.dark-mode footer {
+    background-color: #38384d;
+    color: #ddd; 
+}
+body.dark-mode .btn-daltonismo,
+body.dark-mode .btn-contraste {
+    background-color: #38384d;
+    color: white;
+    border-color: #555;
+}
+
+
+/* 1. MODO DALTÔNICO (Paleta de Alto Contraste para Daltons) */
+body.mode-daltonismo {
+    --cor-verde: #0072B2; /* Azul-Ciano Escuro (Ótimo) */
+    --cor-vermelho: #D55E00; /* Laranja Vívido (Crítico) */
+    --cor-amarelo: #CC79A7; /* Rosa-Magenta (Atenção) */
+    --cor-principal: #009E73; /* Verde-Azulado */
+    --cor-texto: #111; 
+    --cor-fundo: #f0f0f0;
+}
+body.dark-mode.mode-daltonismo {
+    --cor-verde: #56B4E9; 
+    --cor-vermelho: #E69F00; 
+    --cor-amarelo: #F0E442; 
+    --cor-texto: #fff;
+    --cor-principal: #009E73; 
+}
+
+/* Padrões Visuais (Textura) para o Modo Daltônico */
+body.mode-daltonismo .kpi-card[data-status="critico"] {
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--cor-card),
+        var(--cor-card) 10px,
+        rgba(213, 94, 0, 0.2) 10px, 
+        rgba(213, 94, 0, 0.2) 20px
+    );
+    border-color: var(--cor-vermelho); 
+}
+body.mode-daltonismo .kpi-card[data-status="atencao"] {
+    box-shadow: 0 0 10px 3px rgba(204, 121, 167, 0.5); 
+    border-color: var(--cor-amarelo); 
+}
+body.mode-daltonismo #painel-conteudo .barra-principal-progresso[style*="#ffb300"] {
+    border: 2px solid var(--cor-amarelo); 
+    box-sizing: border-box;
+}
+
+
+/* 2. MODO ALTO CONTRASTE */
+body.mode-alto-contraste {
+    --cor-fundo: #000000; 
+    --cor-card: #000000; 
+    --cor-principal: #FFFF00; 
+    --cor-texto: #FFFFFF; 
+    --cor-verde: #008000; 
+    --cor-vermelho: #FF0000; 
+    --cor-amarelo: #FFFF00; 
+}
+
+body.mode-alto-contraste .kpi-meta,
+body.mode-alto-contraste .faq-item p,
+body.mode-alto-contraste footer {
+    color: #FFFFFF; 
+}
+
+body.mode-alto-contraste .kpi-card {
+    border: 1px solid #FFFFFF;
+    box-shadow: none; /* Remove a sombra no Alto Contraste */
+}
+body.mode-alto-contraste .kpi-card:hover {
+    box-shadow: 0 0 10px #FFFF00;
+}
+body.mode-alto-contraste .metodologia-conteudo ul li {
+    background: #000000;
+    border: 1px solid #FFFFFF;
+}
+
+body.mode-alto-contraste .btn-dark,
+body.mode-alto-contraste .btn-daltonismo,
+body.mode-alto-contraste .btn-contraste {
+    background-color: #111;
+    color: #FFFF00;
+    border-color: #FFFF00;
 }
